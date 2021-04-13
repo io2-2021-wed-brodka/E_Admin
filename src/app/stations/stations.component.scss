@@ -96,7 +96,8 @@
     }
   }
 
-  .return-modal-bg {
+  .add-station-modal-bg,
+  .add-bike-modal-bg {
     position: fixed;
     top: 0;
     left: 0;
@@ -106,7 +107,8 @@
     display: grid;
     place-items: center;
 
-    .return-modal {
+    .add-station-modal,
+    .add-bike-modal {
       background: #fff;
       width: 400px;
       padding: 50px;

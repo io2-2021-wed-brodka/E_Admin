@@ -1,7 +1,6 @@
 <div class="stations-component">
 
   <div class="stations">
-    <div class="header">Stations</div>
 
     <div class="filter">
       <input id="filer-stations" value="{{filter}}" type="text" #v placeholder="Filter" (input)="onFilterInput(v.value)">
@@ -29,10 +28,10 @@
 
   </div>
 
-  <div class="return-modal-bg" *ngIf="showAddBikeConfirmDialog">
-    <div class="return-modal">
+  <div class="add-bike-modal-bg" *ngIf="showAddBikeConfirmDialog">
+    <div class="add-bike-modal">
       <div class="description">
-        Are you sure you want to add a new bike to station <span>{{stationDTO.id}}.</span>?
+        Are you sure you want to add a new bike to station <span>{{stationDTO.name}}</span>?
       </div>
       <div class="actions">
         <button class="no" (click)="onAddNewBikeCancel()">No</button>
@@ -41,14 +40,17 @@
     </div>
   </div>
 
-  <div class="return-modal-bg" *ngIf="showAddStationConfirmDialog">
-    <div class="return-modal">
-      <div class="header">
-        New station
-      </div>
+  <div class="add-station-modal-bg" *ngIf="showAddStationConfirmDialog">
+    <div class="add-station-modal">
+
       <div class="description">
         Enter new station's details
       </div>
+
+      <div class="form">
+
+      </div>
+
       <div class="actions">
         <button class="no" (click)="onAddStationCancel()">Cancel</button>
         <button class="yes" (click)="onAddStationConfirm()">Add</button>
