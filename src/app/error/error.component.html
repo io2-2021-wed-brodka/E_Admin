@@ -1,0 +1,8 @@
+<div class="error-wall load-error">
+  <div class="error-container">
+    <h1 i18n>{{error?.title ? error.title : 'Error'}}</h1>
+    <h3>{{error.message}}</h3>
+    <h4 *ngIf="error?.status">{{error.status}}</h4>
+    <p *ngIf="error?.exception">({{error.exception}})</p>
+  </div>
+</div>
