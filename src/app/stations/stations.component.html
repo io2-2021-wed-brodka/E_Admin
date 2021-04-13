@@ -44,11 +44,20 @@
     <div class="add-station-modal">
 
       <div class="description">
-        Enter new station's details
+        New station
       </div>
 
       <div class="form">
-
+        <table>
+          <tr>
+            <td>Name</td>
+            <td><input id="name" type="text" #name placeholder="stations name" (input)="createStationRequestDTO.name=name.value" /></td>
+          </tr>
+          <tr>
+            <td>Capacity</td>
+            <td><input id="capacity" type="number" #capacity placeholder="positive number" (input)="createStationRequestDTO.maxBikes=capacity.valueAsNumber" /></td>
+          </tr>
+        </table>
       </div>
 
       <div class="actions">
