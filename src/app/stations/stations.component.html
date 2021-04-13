@@ -1,7 +1,6 @@
 <div class="stations-component">
 
   <div class="stations">
-    <div class="header">Choose a station to return selected bike</div>
 
     <div class="filter">
       <input id="filer-stations" value="{{filter}}" type="text" #v placeholder="Filter" (input)="onFilterInput(v.value)">
@@ -11,36 +10,60 @@
       <div class="labels">
         <div>Id</div>
         <div class="name">Name</div>
+        <div class="actions">Actions</div>
       </div>
-      <div class="station" *ngFor="let s of stations" (click)="onStationClick(s)"
-           [ngClass]="s == selectedStation && 'active'">
-        <div class="id">{{s.id}}</div>
+      <div class="station" *ngFor="let s of displayedStations">
+        <div class="id" (click)="displayNumberOfBikes(s)">{{s.id}}</div>
         <div class="name">{{s.name}}</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="bikes" *ngIf="selectedStation != null">
-    <div class="header">Select a station to rent a bike</div>
-    <div class="bikes-container">
-      <div class="bike" *ngFor="let b of bikes" (click)="onBikeClick(b)">
-        <div class="bike-img">
-          <img src="assets/img/bike.jpg"/>
+        <div class="actions">
+          <button (click)="onAddNewBikeClick(s)">Add bike</button>
         </div>
-        <span>{{b.id}}</span>
       </div>
     </div>
+
+    <div class="buttons">
+      <button (click)="onAddStationClick()">Add station</button>
+    </div>
+
   </div>
 
-  <div class="return-modal-bg" *ngIf="selectedBike">
-    <div class="return-modal">
+  <div class="add-bike-modal-bg" *ngIf="showAddBikeConfirmDialog">
+    <div class="add-bike-modal">
       <div class="description">
-        Are you sure you want to rent a bike <span>{{selectedBike.id}}.</span>?
+        Are you sure you want to add a new bike to station <span>{{stationDTO.name}}</span>?
       </div>
       <div class="actions">
-        <button class="no" (click)="onNoClick()">No</button>
-        <button class="yes" (click)="onYesClick()">Yes</button>
+        <button class="no" (click)="onAddNewBikeCancel()">No</button>
+        <button class="yes" (click)="onAddNewBikeConfirm()">Yes</button>
       </div>
     </div>
   </div>
+
+  <div class="add-station-modal-bg" *ngIf="showAddStationConfirmDialog">
+    <div class="add-station-modal">
+
+      <div class="description">
+        New station
+      </div>
+
+      <div class="form">
+        <table>
+          <tr>
+            <td>Name</td>
+            <td><input id="name" type="text" #name placeholder="stations name" (input)="createStationRequestDTO.name=name.value" /></td>
+          </tr>
+          <tr>
+            <td>Capacity</td>
+            <td><input id="capacity" type="number" #capacity placeholder="positive number" (input)="createStationRequestDTO.maxBikes=capacity.valueAsNumber" /></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="actions">
+        <button class="no" (click)="onAddStationCancel()">Cancel</button>
+        <button class="yes" (click)="onAddStationConfirm()">Add</button>
+      </div>
+    </div>
+  </div>
+
 </div>

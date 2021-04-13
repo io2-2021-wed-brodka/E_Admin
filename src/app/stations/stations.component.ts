@@ -4,7 +4,7 @@ import {SecurityService} from '../common/service/security.service';
 import {AppService} from '../app.service';
 import {MsgService} from '../common/service/msg.service';
 import {BikeService} from "../common/service/bike.service";
-import {BikeDTO, BikeStationDTO} from "../generated/dto";
+import {AddBikeRequestDTO, BikeDTO, BikeStationDTO, CreateStationRequestDTO} from "../generated/dto";
 import {BikeStationService} from "../common/service/bike-station.service";
 
 @Component({
@@ -22,51 +22,102 @@ export class StationsComponent implements OnInit {
                 private bikeStationService: BikeStationService) {
     }
 
-    bikes: BikeDTO[];
-    selectedBike: BikeDTO;
-    loadedStations: BikeStationDTO[];
-    stations: BikeStationDTO[];
-    selectedStation: BikeStationDTO;
+    allStations: BikeStationDTO[];
+    displayedStations: BikeStationDTO[];
+    stationDTO: BikeStationDTO;
+
+    createStationRequestDTO: CreateStationRequestDTO;
+    addBikeRequestDTO: AddBikeRequestDTO;
+
     filter: string;
 
+    showAddStationConfirmDialog: boolean;
+    showAddBikeConfirmDialog: boolean;
+
     ngOnInit(): void {
-        this.bikeStationService.getAllBikeStations()
-            .subscribe(stations => {
-                this.loadedStations = stations;
-                this.stations = stations;
-            })
+        this.refreshStations();
     }
 
-    onBikeClick(bike: BikeDTO) {
-        this.selectedBike = bike;
+    refreshStations() {
+        this.bikeStationService.getAllBikeStations()
+            .subscribe(stations => {
+                this.allStations = stations;
+                this.displayedStations = stations;
+            })
     }
 
     onFilterInput(value: string) {
         this.filter = value;
-        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ("" + s.id).startsWith(value))
+        this.displayedStations = this.allStations.filter(s =>
+            s.name.includes(value) || ("" + s.id).startsWith(value)
+        );
     }
 
-    onStationClick(s: BikeStationDTO) {
-        if(this.selectedStation == s) {
-            this.selectedStation = null;
-            return;
-        }
-        this.selectedStation = s;
-        this.bikeService.getBikesInStation(s.id)
-            .subscribe(bikes => {
-                this.bikes = bikes;
+    onAddStationClick() {
+        this.createStationRequestDTO = {name: "", maxBikes: 1};
+        this.showAddStationConfirmDialog = true;
+    }
+
+    onAddStationConfirm() {
+        console.log(JSON.stringify(this.createStationRequestDTO));
+
+        if (this.validateCreateStationRequest(this.createStationRequestDTO)) {
+            this.bikeStationService.addBikeStation(this.createStationRequestDTO).subscribe(result => {
+                this.refreshStations();
+                this.onFilterInput(this.filter);
             });
+        }
+        this.showAddStationConfirmDialog = false;
     }
 
-    onNoClick() {
-        this.selectedBike = null;
+    onAddStationCancel() {
+        this.createStationRequestDTO = null;
+        this.showAddStationConfirmDialog = false;
     }
 
-    onYesClick() {
-        this.bikeService.rentBike(this.selectedBike.id)
-            .subscribe(() => {
-                this.bikes = this.bikes.filter(b => b.id != this.selectedBike.id);
-                this.selectedBike = null;
-            })
+    onAddNewBikeClick(stationDTO: BikeStationDTO) {
+        this.addBikeRequestDTO = {stationId: stationDTO.id};
+        this.showAddBikeConfirmDialog = true;
     }
+
+    onAddNewBikeConfirm() {
+        if (this.validateAddBikeRequest(this.addBikeRequestDTO)) {
+            this.bikeService.addBike(this.addBikeRequestDTO).subscribe(result => {});
+        }
+        this.showAddBikeConfirmDialog = false;
+    }
+
+    onAddNewBikeCancel() {
+        this.showAddBikeConfirmDialog = false;
+    }
+
+    validateCreateStationRequest(createStationRequestDTO: CreateStationRequestDTO): boolean {
+        if (createStationRequestDTO == null) {
+            return false;
+        }
+        if (createStationRequestDTO.name == null || createStationRequestDTO.name.length == 0) {
+            return false;
+        }
+        if (createStationRequestDTO.maxBikes == null || createStationRequestDTO.maxBikes <= 0) {
+            return false;
+        }
+        return true;
+    }
+
+    validateAddBikeRequest(addBikeRequest: AddBikeRequestDTO): boolean {
+        if (addBikeRequest == null) {
+            return false;
+        }
+        if (addBikeRequest.stationId == null || addBikeRequest.stationId <= 0) {
+            return false;
+        }
+        return true;
+    }
+
+    displayNumberOfBikes(s: BikeStationDTO) {
+        this.bikeStationService.getBikesInStation(s.id).subscribe(bikes => {
+            alert(`${bikes.length} bikes in station '${s.name}': (${bikes.map(b => b.id).join(", ")})`);
+        })
+    }
+
 }
