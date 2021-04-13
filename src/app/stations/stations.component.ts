@@ -64,8 +64,9 @@ export class StationsComponent implements OnInit {
         this.showAddStationConfirmDialog = false;
     }
 
-    onAddNewBikeClick() {
+    onAddNewBikeClick(stationDTO: BikeStationDTO) {
         this.bikeDTO = new BikeDTO();
+        this.stationDTO = stationDTO;
         this.showAddBikeConfirmDialog = true;
     }
 
