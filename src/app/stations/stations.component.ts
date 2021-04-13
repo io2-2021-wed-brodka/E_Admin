@@ -28,6 +28,9 @@ export class StationsComponent implements OnInit {
     bikeDTO: BikeDTO;
     filter: string;
 
+    showAddStationConfirmDialog: boolean;
+    showAddBikeConfirmDialog: boolean;
+
     ngOnInit(): void {
         this.bikeStationService.getAllBikeStations()
             .subscribe(stations => {
@@ -45,6 +48,7 @@ export class StationsComponent implements OnInit {
 
     onAddStationClick() {
         this.stationDTO = new BikeStationDTO();
+        this.showAddStationConfirmDialog = true;
     }
 
     onAddStationConfirm() {
@@ -52,14 +56,17 @@ export class StationsComponent implements OnInit {
             this.bikeStationService.addBikeStation(this.stationDTO).subscribe(result => {});
         }
         this.stationDTO = null;
+        this.showAddStationConfirmDialog = false;
     }
 
     onAddStationCancel() {
         this.stationDTO = null;
+        this.showAddStationConfirmDialog = false;
     }
 
     onAddNewBikeClick() {
         this.bikeDTO = new BikeDTO();
+        this.showAddBikeConfirmDialog = true;
     }
 
     onAddNewBikeConfirm() {
@@ -67,10 +74,12 @@ export class StationsComponent implements OnInit {
             this.bikeService.addBike(this.bikeDTO).subscribe(result => {});
         }
         this.bikeDTO = null;
+        this.showAddBikeConfirmDialog = false;
     }
 
     onAddNewBikeCancel() {
         this.bikeDTO = null;
+        this.showAddBikeConfirmDialog = false;
     }
 
     validateStationToBeAdded(stationDto: BikeStationDTO): boolean {
