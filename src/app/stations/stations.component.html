@@ -18,13 +18,13 @@
         <div class="id">{{s.id}}</div>
         <div class="name">{{s.name}}</div>
         <div class="actions">
-          <button>Add bike</button>
+          <button (click)="onAddNewBikeClick(s)">Add bike</button>
         </div>
       </div>
     </div>
 
     <div class="buttons">
-      <button>Add station</button>
+      <button (click)="onAddStationClick()">Add station</button>
     </div>
 
   </div>
@@ -35,8 +35,8 @@
         Are you sure you want to add a new bike to station <span>{{stationDTO.id}}.</span>?
       </div>
       <div class="actions">
-        <button class="no" (click)="onAddNewBikeCancel()">Cancel</button>
-        <button class="yes" (click)="onAddNewBikeConfirm()">Confirm</button>
+        <button class="no" (click)="onAddNewBikeCancel()">No</button>
+        <button class="yes" (click)="onAddNewBikeConfirm()">Yes</button>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
       </div>
       <div class="actions">
         <button class="no" (click)="onAddStationCancel()">Cancel</button>
-        <button class="yes" (click)="onAddStationConfirm()">Confirm</button>
+        <button class="yes" (click)="onAddStationConfirm()">Add</button>
       </div>
     </div>
   </div>
