@@ -22,51 +22,77 @@ export class StationsComponent implements OnInit {
                 private bikeStationService: BikeStationService) {
     }
 
-    bikes: BikeDTO[];
-    selectedBike: BikeDTO;
-    loadedStations: BikeStationDTO[];
-    stations: BikeStationDTO[];
-    selectedStation: BikeStationDTO;
+    allStations: BikeStationDTO[];
+    displayedStations: BikeStationDTO[];
+    stationDTO: BikeStationDTO;
+    bikeDTO: BikeDTO;
     filter: string;
 
     ngOnInit(): void {
         this.bikeStationService.getAllBikeStations()
             .subscribe(stations => {
-                this.loadedStations = stations;
-                this.stations = stations;
+                this.allStations = stations;
+                this.displayedStations = stations;
             })
-    }
-
-    onBikeClick(bike: BikeDTO) {
-        this.selectedBike = bike;
     }
 
     onFilterInput(value: string) {
         this.filter = value;
-        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ("" + s.id).startsWith(value))
+        this.displayedStations = this.allStations.filter(s =>
+            s.name.includes(value) || ("" + s.id).startsWith(value)
+        );
     }
 
-    onStationClick(s: BikeStationDTO) {
-        if(this.selectedStation == s) {
-            this.selectedStation = null;
-            return;
+    onAddStationClick() {
+        this.stationDTO = new BikeStationDTO();
+    }
+
+    onAddStationConfirm() {
+        if (this.validateStationToBeAdded(this.stationDTO)) {
+            this.bikeStationService.addBikeStation(this.stationDTO).subscribe(result => {});
         }
-        this.selectedStation = s;
-        this.bikeService.getBikesInStation(s.id)
-            .subscribe(bikes => {
-                this.bikes = bikes;
-            });
+        this.stationDTO = null;
     }
 
-    onNoClick() {
-        this.selectedBike = null;
+    onAddStationCancel() {
+        this.stationDTO = null;
     }
 
-    onYesClick() {
-        this.bikeService.rentBike(this.selectedBike.id)
-            .subscribe(() => {
-                this.bikes = this.bikes.filter(b => b.id != this.selectedBike.id);
-                this.selectedBike = null;
-            })
+    onAddNewBikeClick() {
+        this.bikeDTO = new BikeDTO();
+    }
+
+    onAddNewBikeConfirm() {
+        if (this.validateStationToAddBike(this.stationDTO)) {
+            this.bikeService.addBike(this.bikeDTO).subscribe(result => {});
+        }
+        this.bikeDTO = null;
+    }
+
+    onAddNewBikeCancel() {
+        this.bikeDTO = null;
+    }
+
+    validateStationToBeAdded(stationDto: BikeStationDTO): boolean {
+        if (stationDto == null) {
+            return false;
+        }
+        if (stationDto.name == null || stationDto.name.length == 0) {
+            return false;
+        }
+        if (stationDto.maxBikes == null || stationDto.maxBikes <= 0) {
+            return false;
+        }
+        return true;
+    }
+
+    validateStationToAddBike(stationDto: BikeStationDTO): boolean {
+        if (stationDto == null) {
+            return false;
+        }
+        if (stationDto.id == null || stationDto.id <= 0) {
+            return false;
+        }
+        return true;
     }
 }
