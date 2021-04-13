@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {BikeStationDTO} from "../../generated/dto";
+import {BikeStationDTO, CreateStationRequestDTO} from "../../generated/dto";
 
 @Injectable()
 export class BikeStationService {
@@ -13,8 +13,8 @@ export class BikeStationService {
         return this.http.get<BikeStationDTO[]>("/api/stations");
     }
 
-    addBikeStation(bikeStationDTO: BikeStationDTO): Observable<any>  {
-        return this.http.post("/api/stations", bikeStationDTO);
+    addBikeStation(createStationRequestDTO: CreateStationRequestDTO): Observable<any>  {
+        return this.http.post("/api/stations", createStationRequestDTO);
     }
 
 }

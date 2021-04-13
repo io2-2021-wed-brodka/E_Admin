@@ -4,7 +4,7 @@ import {SecurityService} from '../common/service/security.service';
 import {AppService} from '../app.service';
 import {MsgService} from '../common/service/msg.service';
 import {BikeService} from "../common/service/bike.service";
-import {BikeDTO, BikeStationDTO} from "../generated/dto";
+import {AddBikeRequestDTO, BikeDTO, BikeStationDTO, CreateStationRequestDTO} from "../generated/dto";
 import {BikeStationService} from "../common/service/bike-station.service";
 
 @Component({
@@ -26,12 +26,20 @@ export class StationsComponent implements OnInit {
     displayedStations: BikeStationDTO[];
     stationDTO: BikeStationDTO;
     bikeDTO: BikeDTO;
+
+    createStationRequestDTO: CreateStationRequestDTO;
+    addBikeRequestDTO: AddBikeRequestDTO;
+
     filter: string;
 
     showAddStationConfirmDialog: boolean;
     showAddBikeConfirmDialog: boolean;
 
     ngOnInit(): void {
+        this.refreshStations();
+    }
+
+    refreshStations() {
         this.bikeStationService.getAllBikeStations()
             .subscribe(stations => {
                 this.allStations = stations;
@@ -47,60 +55,61 @@ export class StationsComponent implements OnInit {
     }
 
     onAddStationClick() {
-        this.stationDTO = new BikeStationDTO();
+        this.createStationRequestDTO = {name: "", maxBikes: 1};
         this.showAddStationConfirmDialog = true;
     }
 
     onAddStationConfirm() {
-        if (this.validateStationToBeAdded(this.stationDTO)) {
-            this.bikeStationService.addBikeStation(this.stationDTO).subscribe(result => {});
+        console.log(JSON.stringify(this.createStationRequestDTO));
+
+        if (this.validateCreateStationRequest(this.createStationRequestDTO)) {
+            this.bikeStationService.addBikeStation(this.createStationRequestDTO).subscribe(result => {
+                this.refreshStations();
+                this.onFilterInput(this.filter);
+            });
         }
-        this.stationDTO = null;
         this.showAddStationConfirmDialog = false;
     }
 
     onAddStationCancel() {
-        this.stationDTO = null;
+        this.createStationRequestDTO = null;
         this.showAddStationConfirmDialog = false;
     }
 
     onAddNewBikeClick(stationDTO: BikeStationDTO) {
-        this.bikeDTO = new BikeDTO();
-        this.stationDTO = stationDTO;
+        this.addBikeRequestDTO = {stationId: stationDTO.id};
         this.showAddBikeConfirmDialog = true;
     }
 
     onAddNewBikeConfirm() {
-        if (this.validateStationToAddBike(this.stationDTO)) {
-            this.bikeService.addBike(this.bikeDTO).subscribe(result => {});
+        if (this.validateAddBikeRequest(this.addBikeRequestDTO)) {
+            this.bikeService.addBike(this.addBikeRequestDTO).subscribe(result => {});
         }
-        this.bikeDTO = null;
         this.showAddBikeConfirmDialog = false;
     }
 
     onAddNewBikeCancel() {
-        this.bikeDTO = null;
         this.showAddBikeConfirmDialog = false;
     }
 
-    validateStationToBeAdded(stationDto: BikeStationDTO): boolean {
-        if (stationDto == null) {
+    validateCreateStationRequest(createStationRequestDTO: CreateStationRequestDTO): boolean {
+        if (createStationRequestDTO == null) {
             return false;
         }
-        if (stationDto.name == null || stationDto.name.length == 0) {
+        if (createStationRequestDTO.name == null || createStationRequestDTO.name.length == 0) {
             return false;
         }
-        if (stationDto.maxBikes == null || stationDto.maxBikes <= 0) {
+        if (createStationRequestDTO.maxBikes == null || createStationRequestDTO.maxBikes <= 0) {
             return false;
         }
         return true;
     }
 
-    validateStationToAddBike(stationDto: BikeStationDTO): boolean {
-        if (stationDto == null) {
+    validateAddBikeRequest(addBikeRequest: AddBikeRequestDTO): boolean {
+        if (addBikeRequest == null) {
             return false;
         }
-        if (stationDto.id == null || stationDto.id <= 0) {
+        if (addBikeRequest.stationId == null || addBikeRequest.stationId <= 0) {
             return false;
         }
         return true;
