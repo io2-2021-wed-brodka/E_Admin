@@ -25,7 +25,6 @@ export class StationsComponent implements OnInit {
     allStations: BikeStationDTO[];
     displayedStations: BikeStationDTO[];
     stationDTO: BikeStationDTO;
-    bikeDTO: BikeDTO;
 
     createStationRequestDTO: CreateStationRequestDTO;
     addBikeRequestDTO: AddBikeRequestDTO;
