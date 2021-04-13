@@ -114,4 +114,11 @@ export class StationsComponent implements OnInit {
         }
         return true;
     }
+
+    displayNumberOfBikes(s: BikeStationDTO) {
+        this.bikeStationService.getBikesInStation(s.id).subscribe(bikes => {
+            alert(`${bikes.length} bikes in station '${s.name}': (${bikes.map(b => b.id).join(", ")})`);
+        })
+    }
+
 }

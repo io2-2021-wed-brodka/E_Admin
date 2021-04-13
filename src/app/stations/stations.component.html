@@ -12,9 +12,8 @@
         <div class="name">Name</div>
         <div class="actions">Actions</div>
       </div>
-      <div class="station" *ngFor="let s of displayedStations"
-           [ngClass]="s == stationDTO && 'active'">
-        <div class="id">{{s.id}}</div>
+      <div class="station" *ngFor="let s of displayedStations">
+        <div class="id" (click)="displayNumberOfBikes(s)">{{s.id}}</div>
         <div class="name">{{s.name}}</div>
         <div class="actions">
           <button (click)="onAddNewBikeClick(s)">Add bike</button>
