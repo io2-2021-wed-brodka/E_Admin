@@ -35,6 +35,7 @@ export class StationsComponent implements OnInit {
     showAddStationConfirmDialog: boolean;
     showAddBikeConfirmDialog: boolean;
     showDeleteStationConfirmDialog: boolean;
+    showStationStateChangeConfirmationDialog: boolean;
 
     ngOnInit(): void {
         this.refreshStations();
@@ -91,6 +92,31 @@ export class StationsComponent implements OnInit {
         this.showAddBikeConfirmDialog = false;
     }
 
+    onStationChangeStateClick(stationDTO: BikeStationDTO) {
+        this.stationDTO = stationDTO;
+        this.showStationStateChangeConfirmationDialog = true;
+    }
+
+    onStationChangeStateConfirm() {
+        if (this.isStationBlocked(this.stationDTO)) {
+            this.bikeStationService.unblockStation(this.stationDTO.id).subscribe(result => {
+                this.refreshStations();
+                this.onFilterInput(this.filter);
+            });
+        } else {
+            this.bikeStationService.blockStation(this.stationDTO.id).subscribe(result => {
+                this.refreshStations();
+                this.onFilterInput(this.filter);
+            });
+        }
+
+        this.showStationStateChangeConfirmationDialog = false;
+    }
+
+    onStationChangeStateCancel() {
+        this.showStationStateChangeConfirmationDialog = false;
+    }
+
     onDeleteStationClick(stationDTO: BikeStationDTO) {
         this.stationDTO = stationDTO;
         this.showDeleteStationConfirmDialog = true;
@@ -133,4 +159,13 @@ export class StationsComponent implements OnInit {
         return true;
     }
 
+    displayNumberOfBikes(s: BikeStationDTO) {
+        this.bikeStationService.getBikesInStation(s.id).subscribe(bikes => {
+            alert(`${bikes.length} bikes in station '${s.name}': (${bikes.map(b => b.id).join(", ")})`);
+        })
+    }
+
+    isStationBlocked(s: BikeStationDTO) {
+        return s.status === BikeStationState.Blocked;
+    }
 }
