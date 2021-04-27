@@ -3,9 +3,10 @@ import {Router} from '@angular/router';
 import {SecurityService} from '../common/service/security.service';
 import {AppService} from '../app.service';
 import {MsgService} from '../common/service/msg.service';
-import {BikeService} from '../common/service/bike.service';
-import {AddBikeRequestDTO, BikeStationDTO, BikeStationState, CreateStationRequestDTO} from '../generated/dto';
-import {BikeStationService} from '../common/service/bike-station.service';
+import {BikeService} from "../common/service/bike.service";
+import {AddBikeRequestDTO, BikeDTO, BikeStationDTO, BikeStationState, CreateStationRequestDTO} from '../generated/dto';
+import {BikeStationService} from "../common/service/bike-station.service";
+import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-stations',
@@ -33,6 +34,7 @@ export class StationsComponent implements OnInit {
 
     showAddStationConfirmDialog: boolean;
     showAddBikeConfirmDialog: boolean;
+    showDeleteStationConfirmDialog: boolean;
     showStationStateChangeConfirmationDialog: boolean;
 
     ngOnInit(): void {
@@ -44,7 +46,7 @@ export class StationsComponent implements OnInit {
             .subscribe(stations => {
                 this.allStations = stations;
                 this.displayedStations = stations;
-            })
+            });
     }
 
     onFilterInput(value: string) {
@@ -60,8 +62,6 @@ export class StationsComponent implements OnInit {
     }
 
     onAddStationConfirm() {
-        console.log(JSON.stringify(this.createStationRequestDTO));
-
         if (this.validateCreateStationRequest(this.createStationRequestDTO)) {
             this.bikeStationService.addBikeStation(this.createStationRequestDTO).subscribe(result => {
                 this.refreshStations();
@@ -115,6 +115,25 @@ export class StationsComponent implements OnInit {
 
     onStationChangeStateCancel() {
         this.showStationStateChangeConfirmationDialog = false;
+    }
+
+    onDeleteStationClick(stationDTO: BikeStationDTO) {
+        this.stationDTO = stationDTO;
+        this.showDeleteStationConfirmDialog = true;
+    }
+
+    onDeleteStationCancel() {
+        this.showDeleteStationConfirmDialog = false;
+    }
+
+    onDeleteStationConfirm() {
+        this.bikeStationService.deleteStation(this.stationDTO.id).subscribe(result => {
+            this.refreshStations();
+            this.onFilterInput(this.filter);
+            this.msgService.warn(result);
+        });
+
+        this.showDeleteStationConfirmDialog = false;
     }
 
     validateCreateStationRequest(createStationRequestDTO: CreateStationRequestDTO): boolean {

@@ -13,11 +13,12 @@
         <div class="actions">Actions</div>
       </div>
       <div class="station" *ngFor="let s of displayedStations">
-        <div class="id" (click)="displayNumberOfBikes(s)">{{s.id}}</div>
+        <div class="id">{{s.id}}</div>
         <div class="name">{{s.name}}</div>
         <div class="actions">
           <button (click)="onAddNewBikeClick(s)">Add bike</button>
           <button (click)="onStationChangeStateClick(s)">{{isStationBlocked(s) ? "Unblock" : "Block"}}</button>
+          <button (click)="onDeleteStationClick(s)">Remove station</button>
         </div>
       </div>
     </div>
@@ -75,6 +76,18 @@
       <div class="actions">
         <button class="no" (click)="onStationChangeStateCancel()">No</button>
         <button class="yes" (click)="onStationChangeStateConfirm()">Yes</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="delete-station-modal-bg" *ngIf="showDeleteStationConfirmDialog">
+    <div class="delete-station-modal">
+      <div class="description">
+        Are you sure you want to delete station <span>{{stationDTO.name}}</span>?
+      </div>
+      <div class="actions">
+        <button class="no" (click)="onDeleteStationCancel()">No</button>
+        <button class="yes" (click)="onDeleteStationConfirm()">Yes</button>
       </div>
     </div>
   </div>
