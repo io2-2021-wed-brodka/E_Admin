@@ -21,4 +21,8 @@ export class BikeStationService {
         return this.http.post("/api/stations", createStationRequestDTO);
     }
 
+    deleteStation(stationId: number): Observable<string> {
+        return this.http.delete<string>(`/api/stations/${stationId}`);
+    }
+
 }
