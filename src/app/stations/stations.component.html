@@ -17,6 +17,7 @@
         <div class="name">{{s.name}}</div>
         <div class="actions">
           <button (click)="onAddNewBikeClick(s)">Add bike</button>
+          <button (click)="onStationChangeStateClick(s)">{{isStationBlocked(s) ? "Unblock" : "Block"}}</button>
         </div>
       </div>
     </div>
@@ -62,6 +63,18 @@
       <div class="actions">
         <button class="no" (click)="onAddStationCancel()">Cancel</button>
         <button class="yes" (click)="onAddStationConfirm()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="change-station-state-modal-bg" *ngIf="showStationStateChangeConfirmationDialog">
+    <div class="change-station-state-modal">
+      <div class="description">
+        Are you sure you want to {{isStationBlocked(stationDTO) ? "unblock" : "block"}} station <span>{{stationDTO.name}}</span>?
+      </div>
+      <div class="actions">
+        <button class="no" (click)="onStationChangeStateCancel()">No</button>
+        <button class="yes" (click)="onStationChangeStateConfirm()">Yes</button>
       </div>
     </div>
   </div>

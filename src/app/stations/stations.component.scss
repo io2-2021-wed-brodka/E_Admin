@@ -97,7 +97,8 @@
   }
 
   .add-station-modal-bg,
-  .add-bike-modal-bg {
+  .add-bike-modal-bg,
+  .change-station-state-modal-bg {
     position: fixed;
     top: 0;
     left: 0;
@@ -108,7 +109,8 @@
     place-items: center;
 
     .add-station-modal,
-    .add-bike-modal {
+    .add-bike-modal,
+    .change-station-state-modal {
       background: #fff;
       width: 400px;
       padding: 50px;
