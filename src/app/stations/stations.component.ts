@@ -3,9 +3,9 @@ import {Router} from '@angular/router';
 import {SecurityService} from '../common/service/security.service';
 import {AppService} from '../app.service';
 import {MsgService} from '../common/service/msg.service';
-import {BikeService} from "../common/service/bike.service";
-import {AddBikeRequestDTO, BikeDTO, BikeStationDTO, CreateStationRequestDTO} from "../generated/dto";
-import {BikeStationService} from "../common/service/bike-station.service";
+import {BikeService} from '../common/service/bike.service';
+import {AddBikeRequestDTO, BikeStationDTO, BikeStationState, CreateStationRequestDTO} from '../generated/dto';
+import {BikeStationService} from '../common/service/bike-station.service';
 
 @Component({
     selector: 'app-stations',
@@ -33,6 +33,7 @@ export class StationsComponent implements OnInit {
 
     showAddStationConfirmDialog: boolean;
     showAddBikeConfirmDialog: boolean;
+    showStationStateChangeConfirmationDialog: boolean;
 
     ngOnInit(): void {
         this.refreshStations();
@@ -91,6 +92,31 @@ export class StationsComponent implements OnInit {
         this.showAddBikeConfirmDialog = false;
     }
 
+    onStationChangeStateClick(stationDTO: BikeStationDTO) {
+        this.stationDTO = stationDTO;
+        this.showStationStateChangeConfirmationDialog = true;
+    }
+
+    onStationChangeStateConfirm() {
+        if (this.isStationBlocked(this.stationDTO)) {
+            this.bikeStationService.unblockStation(this.stationDTO.id).subscribe(result => {
+                this.refreshStations();
+                this.onFilterInput(this.filter);
+            });
+        } else {
+            this.bikeStationService.blockStation(this.stationDTO.id).subscribe(result => {
+                this.refreshStations();
+                this.onFilterInput(this.filter);
+            });
+        }
+
+        this.showStationStateChangeConfirmationDialog = false;
+    }
+
+    onStationChangeStateCancel() {
+        this.showStationStateChangeConfirmationDialog = false;
+    }
+
     validateCreateStationRequest(createStationRequestDTO: CreateStationRequestDTO): boolean {
         if (createStationRequestDTO == null) {
             return false;
@@ -120,4 +146,7 @@ export class StationsComponent implements OnInit {
         })
     }
 
+    isStationBlocked(s: BikeStationDTO) {
+        return s.status === BikeStationState.Blocked;
+    }
 }
