@@ -98,6 +98,8 @@
 
   .add-station-modal-bg,
   .add-bike-modal-bg,
+  .delete-station-modal-bg
+  .add-bike-modal-bg,
   .change-station-state-modal-bg {
     position: fixed;
     top: 0;
@@ -110,7 +112,9 @@
 
     .add-station-modal,
     .add-bike-modal,
-    .change-station-state-modal {
+    .change-station-state-modal
+    .add-bike-modal,
+    .delete-station-modal {
       background: #fff;
       width: 400px;
       padding: 50px;
