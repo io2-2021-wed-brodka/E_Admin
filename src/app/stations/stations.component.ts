@@ -42,8 +42,8 @@ export class StationsComponent implements OnInit {
     refreshStations() {
         this.bikeStationService.getAllBikeStations()
             .subscribe(stations => {
-                this.allStations = stations;
-                this.displayedStations = stations;
+                this.allStations = stations.stations;
+                this.displayedStations = stations.stations;
             })
     }
 
