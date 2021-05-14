@@ -500,10 +500,10 @@
       "id": "5acc00ad-924e-4d6d-8593-ac010df4ac8c",
       "comment": "",
       "command": "click",
-      "target": "css=.station:nth-child(9) button",
+      "target": "css=.station:nth-child(8) button:nth-child(1)",
       "targets": [
-        ["css=.station:nth-child(9) button", "css:finder"],
-        ["xpath=//div[9]/div[3]/button", "xpath:position"]
+        ["css=.station:nth-child(8) button:nth-child(1)", "css:finder"],
+        ["xpath=//div[8]/div[3]/button", "xpath:position"]
       ],
       "value": ""
     }, {

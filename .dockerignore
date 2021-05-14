@@ -1,0 +1,7 @@
+.idea
+node
+node_modules
+Dockerfile
+.gitignore
+README.md
+*.side
