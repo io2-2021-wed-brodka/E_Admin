@@ -49,7 +49,7 @@
     }
 
     .stations-container {
-      width: 50%;
+      width: 75%;
       padding: 15px;
       border-radius: 15px;
       background: #fff;
@@ -75,6 +75,20 @@
         padding-bottom: 10px;
         color: #000;
 
+        .id {
+          width: 20%;
+        }
+
+        .name {
+          width: 25%;
+        }
+
+        .actions {
+          display: flex;
+          justify-content: center;
+          width: 55%;
+        }
+
         .actions {
           margin-left: auto;
         }
@@ -87,12 +101,25 @@
         transition: .2s;
         cursor: pointer;
 
+        .id {
+          width: 20%;
+        }
+
+        .name {
+          width: 25%;
+        }
+
+        .actions {
+          width: 55%;
+          display: flex;
+          justify-content: center;
+        }
+
         &:hover, &.active {
           background: #eee;
           color: #000;
         }
       }
-
     }
   }
 
@@ -138,8 +165,9 @@
       }
 
       .actions {
+
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         margin-top: 50px;
 
         button {
@@ -151,6 +179,7 @@
           font-size: 20px;
           cursor: pointer;
           outline: none;
+          margin-right: 10px;
           border-radius: 5px;
 
           &.yes {
@@ -172,4 +201,55 @@
       }
     }
   }
+}
+
+.remove-button {
+  border: unset;
+  background: #dc4343;
+  float: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: ease-in-out all .2s;
+  display: block;
+  padding: 5px;
+  font-size: 14px;
+
+  &:hover {
+    background: #b11c23;
+  }
+
+}
+
+.unlock-button {
+  border: unset;
+  background: #3ea0dc;
+  float: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: ease-in-out all .2s;
+  display: block;
+  padding: 5px;
+  font-size: 14px;
+
+  &:hover {
+    background: #2389cd;
+  }
+
+}
+
+.add-button {
+  border: unset;
+  background: #7bd055;
+  float: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: ease-in-out all .2s;
+  display: block;
+  padding: 5px;
+  font-size: 14px;
+
+  &:hover {
+    background: #55971c;
+  }
+
 }
