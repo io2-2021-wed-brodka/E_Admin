@@ -3,10 +3,9 @@ import {Router} from '@angular/router';
 import {SecurityService} from '../common/service/security.service';
 import {AppService} from '../app.service';
 import {MsgService} from '../common/service/msg.service';
-import {BikeService} from "../common/service/bike.service";
-import {AddBikeRequestDTO, BikeDTO, BikeStationDTO, BikeStationState, CreateStationRequestDTO} from '../generated/dto';
-import {BikeStationService} from "../common/service/bike-station.service";
-import {map} from 'rxjs/operators';
+import {BikeService} from '../common/service/bike.service';
+import {AddBikeRequestDTO, BikeStationDTO, BikeStationState, CreateStationRequestDTO} from '../generated/dto';
+import {BikeStationService} from '../common/service/bike-station.service';
 
 @Component({
     selector: 'app-stations',
@@ -46,18 +45,18 @@ export class StationsComponent implements OnInit {
             .subscribe(stations => {
                 this.allStations = stations.stations;
                 this.displayedStations = stations.stations;
-            })
+            });
     }
 
     onFilterInput(value: string) {
         this.filter = value;
         this.displayedStations = this.allStations.filter(s =>
-            s.name.includes(value) || ("" + s.id).startsWith(value)
+            s.name.includes(value) || ('' + s.id).startsWith(value)
         );
     }
 
     onAddStationClick() {
-        this.createStationRequestDTO = {name: "", maxBikes: 1};
+        this.createStationRequestDTO = {name: '', maxBikes: 1};
         this.showAddStationConfirmDialog = true;
     }
 
@@ -83,7 +82,8 @@ export class StationsComponent implements OnInit {
 
     onAddNewBikeConfirm() {
         if (this.validateAddBikeRequest(this.addBikeRequestDTO)) {
-            this.bikeService.addBike(this.addBikeRequestDTO).subscribe(result => {});
+            this.bikeService.addBike(this.addBikeRequestDTO).subscribe(result => {
+            });
         }
         this.showAddBikeConfirmDialog = false;
     }
@@ -127,11 +127,15 @@ export class StationsComponent implements OnInit {
     }
 
     onDeleteStationConfirm() {
-        this.bikeStationService.deleteStation(this.stationDTO.id).subscribe(result => {
-            this.refreshStations();
-            this.onFilterInput(this.filter);
-            this.msgService.warn(result);
-        });
+        this.bikeStationService.deleteStation(this.stationDTO.id).subscribe(
+            result => {
+                this.refreshStations();
+                this.onFilterInput(this.filter);
+                this.msgService.success('Station successfully deleted');
+            },
+            errorResult => {
+                this.msgService.error(errorResult.error.message);
+            });
 
         this.showDeleteStationConfirmDialog = false;
     }
@@ -161,8 +165,8 @@ export class StationsComponent implements OnInit {
 
     displayNumberOfBikes(s: BikeStationDTO) {
         this.bikeStationService.getBikesInStation(s.id).subscribe(bikes => {
-            alert(`${bikes.length} bikes in station '${s.name}': (${bikes.map(b => b.id).join(", ")})`);
-        })
+            alert(`${bikes.length} bikes in station '${s.name}': (${bikes.map(b => b.id).join(', ')})`);
+        });
     }
 
     isStationBlocked(s: BikeStationDTO) {

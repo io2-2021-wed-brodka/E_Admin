@@ -8,7 +8,7 @@
 
     <div class="stations-container">
       <div class="labels">
-        <div>Id</div>
+        <div class="id">Id</div>
         <div class="name">Name</div>
         <div class="actions">Actions</div>
       </div>
@@ -16,15 +16,15 @@
         <div class="id">{{s.id}}</div>
         <div class="name">{{s.name}}</div>
         <div class="actions">
-          <button (click)="onAddNewBikeClick(s)">Add bike</button>
-          <button (click)="onStationChangeStateClick(s)">{{isStationBlocked(s) ? "Unblock" : "Block"}}</button>
-          <button (click)="onDeleteStationClick(s)">Remove station</button>
+          <button class="ui-button add-button" (click)="onAddNewBikeClick(s)">Add bike</button>
+          <button class="ui-button unlock-button" (click)="onStationChangeStateClick(s)">{{isStationBlocked(s) ? "Unblock" : "Block"}}</button>
+          <button class="ui-button remove-button" (click)="onDeleteStationClick(s)">Remove station</button>
         </div>
       </div>
     </div>
 
     <div class="buttons">
-      <button (click)="onAddStationClick()">Add station</button>
+      <button class="ui-button add-button" (click)="onAddStationClick()">Add station</button>
     </div>
 
   </div>
