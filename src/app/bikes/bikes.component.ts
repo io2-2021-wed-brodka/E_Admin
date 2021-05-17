@@ -21,11 +21,11 @@ export class BikesComponent implements OnInit {
     }
 
     displayedBikes: BikeDTO[];
+    selectedBike: BikeDTO;
 
-    filter: string;
+    showDeleteBikeDialog = false;
 
     ngOnInit(): void {
-        console.log('refreshing bikes');
         this.refreshBikes();
     }
 
@@ -33,5 +33,28 @@ export class BikesComponent implements OnInit {
         this.bikeService.getAllBikes().subscribe(bikesResponse => {
             this.displayedBikes = bikesResponse.bikes;
         });
+    }
+
+    onDeleteBikeClicked(bike: BikeDTO) {
+        this.selectedBike = bike;
+        this.showDeleteBikeDialog = true;
+    }
+
+    confirmBikeDeletion() {
+        this.bikeService.deleteBike(this.selectedBike.id).subscribe(emptyResponse => {
+            this.refreshBikes();
+            this.selectedBike = undefined;
+            this.showDeleteBikeDialog = false;
+            this.msgService.success('Successfully deleted bike');
+        }, errorResponse => {
+            this.msgService.error(errorResponse.error.message);
+            this.selectedBike = undefined;
+            this.showDeleteBikeDialog = false;
+        });
+    }
+
+    yieldBikeDeletion() {
+        this.selectedBike = undefined;
+        this.showDeleteBikeDialog = false;
     }
 }

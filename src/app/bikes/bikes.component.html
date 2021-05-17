@@ -2,17 +2,31 @@
     <div class="bikes">
         <div class="bikes-container">
             <div class="labels">
-                <div>Id</div>
-                <div class="name">Name</div>
+                <div class="id">Id</div>
+                <div class="status">Status</div>
+                <div class="station-id">Station Id</div>
                 <div class="actions">Actions</div>
             </div>
             <div class="bike" *ngFor="let b of displayedBikes">
                 <div class="id">{{b.id}}</div>
                 <div class="status">{{b.status}}</div>
-                <div class="status">{{b?.station?.id}}</div>
+                <div class="station-id">{{b?.station?.id}}</div>
                 <div class="actions">
-                    <button>Delete bike</button>
+                    <button class="ui-button delete-button" (click)="onDeleteBikeClicked(b)">Delete bike</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="showDeleteBikeDialog">
+        <div>
+            <div class="description">
+                Are you sure you want to delete bike with Id: <span>{{selectedBike.id}}</span>?
+            </div>
+            <div class="actions">
+                <button class="no" (click)="yieldBikeDeletion()">No</button>
+                <button class="yes" (click)="confirmBikeDeletion()">Yes</button>
             </div>
         </div>
     </div>
