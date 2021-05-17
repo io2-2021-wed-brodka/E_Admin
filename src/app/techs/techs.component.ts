@@ -9,11 +9,11 @@ import {TechService} from "../common/service/tech.service";
 import {map} from 'rxjs/operators';
 
 @Component({
-    selector: 'app-stations',
-    templateUrl: './stations.component.html',
-    styleUrls: ['./stations.component.scss']
+    selector: 'app-techs',
+    templateUrl: './techs.component.html',
+    styleUrls: ['./techs.component.scss']
 })
-export class StationsComponent implements OnInit {
+export class TechsComponent implements OnInit {
 
     constructor(private securityService: SecurityService,
                 private app: AppService,
@@ -77,12 +77,12 @@ export class StationsComponent implements OnInit {
                 this.refreshTechs();
             });
         } else {
-            this.userService.blockUser(new BlockUserRequestDTO(){id: this.userDTO.id}).subscribe(result => {
-                this.refreshTechs();
-            });
+//             this.userService.blockUser(new BlockUserRequestDTO{id: this.userDTO.id,}).subscribe(result => {
+//                 this.refreshTechs();
+//             });
         }
 
-        this.showTechsStateChangeConfirmationDialog = false;
+        this.showTechStateChangeConfirmationDialog = false;
     }
 
     onTechChangeStateCancel() {
@@ -101,7 +101,6 @@ export class StationsComponent implements OnInit {
     onDeleteTechConfirm() {
         this.techService.deleteTech(this.userDTO.id).subscribe(result => {
             this.refreshTechs();
-            this.msgService.warn(result);
         });
 
         this.showDeleteTechConfirmDialog = false;
@@ -121,7 +120,7 @@ export class StationsComponent implements OnInit {
     }
 
 
-    isTechBlocked(s: userDTO) {
+    isTechBlocked(s: UserDTO) {
         return s.status === UserStatus.BLOCKED;
     }
 }

@@ -4,13 +4,13 @@ import {Observable} from "rxjs";
 import {UserListDTO, BlockUserRequestDTO, UserDTO} from '../../generated/dto';
 
 @Injectable()
-export class BikeStationService {
+export class UserService {
 
     constructor(private http: HttpClient) {
     }
 
     getAllUsers(): Observable<UserListDTO> {
-        return this.http.get<BikeStationListDTO>("/api/users");
+        return this.http.get<UserListDTO>("/api/users");
     }
 
     getBlockedUsers(): Observable<UserListDTO> {

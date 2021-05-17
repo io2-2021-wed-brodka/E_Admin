@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {CreateTechRequestDTO, TechListDTO, UserDTO} from '../../generated/dto';
 
 @Injectable()
-export class BikeStationService {
+export class TechService {
 
     constructor(private http: HttpClient) {
     }
