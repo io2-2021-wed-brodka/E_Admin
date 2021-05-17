@@ -51,6 +51,7 @@ import {BikeStationService} from "./common/service/bike-station.service";
 import {AuthInterceptor} from "./common/interceptors/auth-interceptor";
 import {RegisterService} from "./common/service/register.service";
 import {BikeService} from "./common/service/bike.service";
+import {BikesComponent} from './bikes/bikes.component';
 
 registerLocaleData(localePl, 'pl');
 
@@ -62,6 +63,7 @@ registerLocaleData(localePl, 'pl');
         MainComponent,
         MenuComponent,
         StationsComponent,
+        BikesComponent
     ],
     imports: [
         HttpClientModule,

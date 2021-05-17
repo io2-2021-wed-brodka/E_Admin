@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AddBikeRequestDTO} from "../../generated/dto";
+import {AddBikeRequestDTO, BikeListDTO} from '../../generated/dto';
 
 @Injectable()
 export class BikeService {
@@ -13,4 +13,7 @@ export class BikeService {
         return this.http.post("/api/bikes", addBikeRequestDTO);
     }
 
+    getAllBikes(): Observable<BikeListDTO> {
+        return this.http.get<BikeListDTO>('/api/bikes');
+    }
 }
