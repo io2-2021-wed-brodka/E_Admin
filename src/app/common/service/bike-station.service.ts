@@ -25,8 +25,8 @@ export class BikeStationService {
         return this.http.post<BikeStationDTO>(`/api/stations/blocked`, stationId);
     }
 
-    unblockStation(stationId: number): Observable<string> {
-        return this.http.delete<string>(`/api/stations/blocked/${stationId}`);
+    unblockStation(stationId: number): Observable<MessageResponseDTO> {
+        return this.http.delete<MessageResponseDTO>(`/api/stations/blocked/${stationId}`);
     }
 
     deleteStation(stationId: number): Observable<MessageResponseDTO> {
