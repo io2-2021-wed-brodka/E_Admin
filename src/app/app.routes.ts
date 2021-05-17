@@ -1,8 +1,9 @@
 import {Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
-import {StationsComponent} from "./stations/stations.component";
-import {AuthGuard} from "./common/guards/auth-guard";
+import {StationsComponent} from './stations/stations.component';
+import {AuthGuard} from './common/guards/auth-guard';
+import {BikesComponent} from './bikes/bikes.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -16,6 +17,10 @@ export const routes: Routes = [
             {
                 path: 'stations',
                 component: StationsComponent
+            },
+            {
+                path: 'bikes',
+                component: BikesComponent
             },
         ]
     },
