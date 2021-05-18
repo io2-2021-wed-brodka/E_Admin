@@ -24,7 +24,7 @@
 
   .stations {
     padding: 20px;
-    width: 75%;
+    width: 99%;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -54,7 +54,7 @@
     }
 
     .stations-container {
-      width: 75%;
+      width: 99%;
       padding: 15px;
       border-radius: 15px;
       background: #fff;
@@ -72,7 +72,12 @@
         }
 
         .actions {
+          width: 66%;
           margin-left: auto;
+
+          a {
+            padding-right: 10px;
+          }
         }
       }
 
@@ -130,7 +135,7 @@
 
   .add-station-modal-bg,
   .add-bike-modal-bg,
-  .delete-station-modal-bg
+  .delete-station-modal-bg,
   .add-bike-modal-bg,
   .change-station-state-modal-bg {
     position: fixed;
@@ -144,7 +149,7 @@
 
     .add-station-modal,
     .add-bike-modal,
-    .change-station-state-modal
+    .change-station-state-modal,
     .add-bike-modal,
     .delete-station-modal {
       background: #fff;

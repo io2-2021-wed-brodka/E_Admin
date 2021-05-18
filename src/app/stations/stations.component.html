@@ -10,11 +10,17 @@
       <div class="labels">
         <div class="id">Id</div>
         <div class="name">Name</div>
+        <div class="name">#Bikes</div>
+        <div class="name">#Reservations</div>
+        <div class="name">#Malfunctions</div>
         <div class="actions">Actions</div>
       </div>
       <div class="station" *ngFor="let s of displayedStations">
         <div class="id">{{s.id}}</div>
         <div class="name">{{s.name}}</div>
+        <div class="name">0/{{s.maxBikes}}</div>
+        <div class="name">0</div>
+        <div class="name">0</div>
         <div class="actions">
           <button class="ui-button add-button" (click)="onAddNewBikeClick(s)">Add bike</button>
           <button class="ui-button unlock-button" (click)="onStationChangeStateClick(s)">{{isStationBlocked(s) ? "Unblock" : "Block"}}</button>
