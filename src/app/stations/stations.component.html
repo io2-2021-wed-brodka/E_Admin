@@ -18,7 +18,7 @@
       <div class="station" *ngFor="let s of displayedStations">
         <div class="id">{{s.id}}</div>
         <div class="name">{{s.name}}</div>
-        <div class="name">0/{{s.maxBikes}}</div>
+        <div class="name"><a (click)="displayNumberOfBikes(s)">0</a>/{{s.maxBikes}}</div>
         <div class="name">0</div>
         <div class="name">0</div>
         <div class="actions">

@@ -164,8 +164,8 @@ export class StationsComponent implements OnInit {
     }
 
     displayNumberOfBikes(s: BikeStationDTO) {
-        this.bikeStationService.getBikesInStation(s.id).subscribe(bikes => {
-            alert(`${bikes.length} bikes in station '${s.name}': (${bikes.map(b => b.id).join(', ')})`);
+        this.bikeStationService.getBikesInStation(s.id).subscribe(bikeList => {
+            alert(`${s.name} contains ${bikeList.bikes.length} bikes: (${bikeList.bikes.map(b => b.id).join(', ')})`);
         });
     }
 
