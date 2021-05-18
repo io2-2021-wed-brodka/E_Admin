@@ -4,6 +4,9 @@ import {MainComponent} from './main/main.component';
 import {StationsComponent} from "./stations/stations.component";
 import {TechsComponent} from "./techs/techs.component";
 import {AuthGuard} from "./common/guards/auth-guard";
+import {StationsComponent} from './stations/stations.component';
+import {AuthGuard} from './common/guards/auth-guard';
+import {BikesComponent} from './bikes/bikes.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -21,6 +24,10 @@ export const routes: Routes = [
             {
                 path: 'techs',
                 component: TechsComponent
+            },
+            {
+                path: 'bikes',
+                component: BikesComponent
             },
         ]
     },

@@ -54,6 +54,7 @@ import {BikeService} from "./common/service/bike.service";
 import {UserService} from "./common/service/user.service";
 import {TechService} from "./common/service/tech.service";
 import {TechsComponent} from "./techs/techs.component";
+import {BikesComponent} from './bikes/bikes.component';
 
 registerLocaleData(localePl, 'pl');
 
@@ -66,6 +67,7 @@ registerLocaleData(localePl, 'pl');
         MenuComponent,
         StationsComponent,
         TechsComponent,
+        BikesComponent
     ],
     imports: [
         HttpClientModule,

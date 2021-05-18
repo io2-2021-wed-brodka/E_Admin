@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {BikeDTO, BikeStationDTO, BikeStationListDTO, CreateStationRequestDTO} from '../../generated/dto';
+import {BikeDTO, BikeStationDTO, BikeStationListDTO, CreateStationRequestDTO, MessageResponseDTO} from '../../generated/dto';
 
 @Injectable()
 export class BikeStationService {
@@ -25,12 +25,12 @@ export class BikeStationService {
         return this.http.post<BikeStationDTO>(`/api/stations/blocked`, stationId);
     }
 
-    unblockStation(stationId: number): Observable<string> {
-        return this.http.delete<string>(`/api/stations/blocked/${stationId}`);
+    unblockStation(stationId: number): Observable<MessageResponseDTO> {
+        return this.http.delete<MessageResponseDTO>(`/api/stations/blocked/${stationId}`);
     }
 
-    deleteStation(stationId: number): Observable<string> {
-        return this.http.delete<string>(`/api/stations/${stationId}`);
+    deleteStation(stationId: number): Observable<MessageResponseDTO> {
+        return this.http.delete<MessageResponseDTO>(`/api/stations/${stationId}`);
     }
 
 }
