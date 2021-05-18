@@ -68,8 +68,8 @@
     </div>
   </div>
 
-  <div class="change-station-state-modal-bg" *ngIf="showStationStateChangeConfirmationDialog">
-    <div class="change-station-state-modal">
+  <div class="add-bike-modal-bg" *ngIf="showStationStateChangeConfirmationDialog">
+    <div class="add-bike-modal">
       <div class="description">
         Are you sure you want to {{isStationBlocked(stationDTO) ? "unblock" : "block"}} station <span>{{stationDTO.name}}</span>?
       </div>
@@ -80,8 +80,8 @@
     </div>
   </div>
 
-  <div class="delete-station-modal-bg" *ngIf="showDeleteStationConfirmDialog">
-    <div class="delete-station-modal">
+  <div class="add-bike-modal-bg" *ngIf="showDeleteStationConfirmDialog">
+    <div class="add-bike-modal">
       <div class="description">
         Are you sure you want to delete station <span>{{stationDTO.name}}</span>?
       </div>

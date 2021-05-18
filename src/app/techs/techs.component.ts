@@ -4,8 +4,8 @@ import {SecurityService} from '../common/service/security.service';
 import {AppService} from '../app.service';
 import {MsgService} from '../common/service/msg.service';
 import {CreateTechRequestDTO, BlockUserRequestDTO, TechListDTO, UserStatus, UserDTO} from '../generated/dto';
-import {UserService} from "../common/service/user.service";
-import {TechService} from "../common/service/tech.service";
+import {UserService} from '../common/service/user.service';
+import {TechService} from '../common/service/tech.service';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -77,9 +77,9 @@ export class TechsComponent implements OnInit {
                 this.refreshTechs();
             });
         } else {
-//             this.userService.blockUser(new BlockUserRequestDTO{id: this.userDTO.id,}).subscribe(result => {
-//                 this.refreshTechs();
-//             });
+            this.userService.blockUser({id: this.tech.id}).subscribe(result => {
+                this.refreshTechs();
+            });
         }
 
         this.showTechStateChangeConfirmationDialog = false;
