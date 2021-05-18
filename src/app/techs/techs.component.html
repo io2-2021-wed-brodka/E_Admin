@@ -35,11 +35,11 @@
         <table>
           <tr>
             <td>Name/login</td>
-            <td><input id="name" type="text" #name placeholder="Tech name/login" (input)="CreateTechRequestDTO.name=name.value" /></td>
+            <td><input id="name" type="text" #name placeholder="Tech name/login" (input)="createTechRequestDTO.name=name.value" /></td>
           </tr>
           <tr>
             <td>Password</td>
-            <td><input id="password" type="password" #password placeholder="****" (input)="CreateTechRequestDTO.password=password.value" /></td>
+            <td><input id="password" type="password" #password placeholder="****" (input)="createTechRequestDTO.password=password.value" /></td>
           </tr>
         </table>
       </div>
@@ -54,7 +54,7 @@
   <div class="change-tech-state-modal-bg" *ngIf="showTechStateChangeConfirmationDialog">
     <div class="change-tech-state-modal">
       <div class="description">
-        Are you sure you want to {{isTechBlocked(techDTO) ? "unblock" : "block"}} station <span>{{techDTO.name}}</span>?
+        Are you sure you want to {{isTechBlocked(tech) ? "unblock" : "block"}} station <span>{{tech.name}}</span>?
       </div>
       <div class="actions">
         <button class="no" (click)="onTechChangeStateCancel()">No</button>
@@ -66,7 +66,7 @@
   <div class="delete-tech-modal-bg" *ngIf="showDeleteTechConfirmDialog">
     <div class="delete-tech-modal">
       <div class="description">
-        Are you sure you want to delete tech <span>{{techDTO.name}}</span>?
+        Are you sure you want to delete tech <span>{{tech.name}}</span>?
       </div>
       <div class="actions">
         <button class="no" (click)="onDeleteTechCancel()">No</button>

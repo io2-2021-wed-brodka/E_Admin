@@ -25,7 +25,7 @@ export class TechsComponent implements OnInit {
 
     allTechs: UserDTO[];
     displayedTechs: UserDTO[];
-    userDTO: UserDTO;
+    tech: UserDTO;
 
     createTechRequestDTO: CreateTechRequestDTO;
 
@@ -43,7 +43,7 @@ export class TechsComponent implements OnInit {
             .subscribe(techs => {
                 this.allTechs = techs.techs;
                 this.displayedTechs = techs.techs;
-            })
+            });
     }
 
 
@@ -66,14 +66,14 @@ export class TechsComponent implements OnInit {
         this.showAddTechConfirmDialog = false;
     }
 
-    onSTechChangeStateClick(userDTO: UserDTO) {
-        this.userDTO = userDTO;
+    onTechChangeStateClick(userDTO: UserDTO) {
+        this.tech = userDTO;
         this.showTechStateChangeConfirmationDialog = true;
     }
 
     onTechChangeStateConfirm() {
-        if (this.isTechBlocked(this.userDTO)) {
-            this.userService.unblockUser(this.userDTO.id).subscribe(result => {
+        if (this.isTechBlocked(this.tech)) {
+            this.userService.unblockUser(this.tech.id).subscribe(result => {
                 this.refreshTechs();
             });
         } else {
@@ -90,7 +90,7 @@ export class TechsComponent implements OnInit {
     }
 
     onDeleteTechClick(userDTO: UserDTO) {
-        this.userDTO = userDTO;
+        this.tech = userDTO;
         this.showDeleteTechConfirmDialog = true;
     }
 
@@ -99,7 +99,7 @@ export class TechsComponent implements OnInit {
     }
 
     onDeleteTechConfirm() {
-        this.techService.deleteTech(this.userDTO.id).subscribe(result => {
+        this.techService.deleteTech(this.tech.id).subscribe(result => {
             this.refreshTechs();
         });
 
