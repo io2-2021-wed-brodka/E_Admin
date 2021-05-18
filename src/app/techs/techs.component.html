@@ -12,14 +12,14 @@
         <div class="id">{{s.id}}</div>
         <div class="name">{{s.name}}</div>
         <div class="actions">
-          <button (click)="onTechChangeStateClick(s)">{{isTechBlocked(s) ? "Unblock" : "Block"}}</button>
-          <button (click)="onDeleteTechClick(s)">Delete tech</button>
+          <button  class="ui-button remove-button" (click)="onDeleteTechClick(s)">Delete tech</button>
+          <button  class="ui-button unlock-button" (click)="onTechChangeStateClick(s)">{{isTechBlocked(s) ? "Unblock" : "Block"}}</button>
         </div>
       </div>
     </div>
 
     <div class="buttons">
-      <button (click)="onAddTechClick()">Add new tech</button>
+      <button class="ui-button add-button" (click)="onAddTechClick()">Add new tech</button>
     </div>
 
   </div>
@@ -45,32 +45,33 @@
       </div>
 
       <div class="actions">
-        <button class="no" (click)="onAddTechCancel()">Cancel</button>
-        <button class="yes" (click)="onAddTechConfirm()">Add</button>
+        <button class="ui-button remove-button" (click)="onAddTechCancel()">Cancel</button>
+        <button class="ui-button add-button" (click)="onAddTechConfirm()">Add</button>
       </div>
     </div>
   </div>
 
-  <div class="change-tech-state-modal-bg" *ngIf="showTechStateChangeConfirmationDialog">
-    <div class="change-tech-state-modal">
+  <div class="add-tech-modal-bg" *ngIf="showDeleteTechConfirmDialog">
+    <div class="add-tech-modal">
+        <div class="description">
+          Are you sure you want to delete tech <span>{{tech.name}}</span>?
+        </div>
+        <div class="actions">
+          <button class="ui-button remove-button" (click)="onDeleteTechCancel()">No</button>
+          <button class="ui-button add-button" (click)="onDeleteTechConfirm()">Yes</button>
+        </div>
+    </div>
+  </div>
+
+  <div class="add-tech-modal-bg" *ngIf="showTechStateChangeConfirmationDialog">
+    <div class="add-tech-modal">
       <div class="description">
         Are you sure you want to {{isTechBlocked(tech) ? "unblock" : "block"}} station <span>{{tech.name}}</span>?
       </div>
-      <div class="actions">
-        <button class="no" (click)="onTechChangeStateCancel()">No</button>
-        <button class="yes" (click)="onTechChangeStateConfirm()">Yes</button>
-      </div>
-    </div>
-  </div>
 
-  <div class="delete-tech-modal-bg" *ngIf="showDeleteTechConfirmDialog">
-    <div class="delete-tech-modal">
-      <div class="description">
-        Are you sure you want to delete tech <span>{{tech.name}}</span>?
-      </div>
       <div class="actions">
-        <button class="no" (click)="onDeleteTechCancel()">No</button>
-        <button class="yes" (click)="onDeleteTechConfirm()">Yes</button>
+        <button class="ui-button remove-button" (click)="onTechChangeStateCancel()">No</button>
+        <button class="ui-button add-button" (click)="onTechChangeStateConfirm()">Yes</button>
       </div>
     </div>
   </div>

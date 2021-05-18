@@ -1,8 +1,13 @@
 .stations-component {
   padding: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
   color: #444;
+
+  button {
+    margin: 0 10px;
+  }
 
   .header {
     font-size: 20px;
@@ -19,7 +24,7 @@
 
   .stations {
     padding: 20px;
-    width: 50%;
+    width: 75%;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -211,11 +216,11 @@
   font-weight: bold;
   transition: ease-in-out all .2s;
   display: block;
-  padding: 5px;
+  padding: 5px 10px;
   font-size: 14px;
 
   &:hover {
-    background: #b11c23;
+    background: #b11c23 !important;
   }
 
 }
@@ -228,11 +233,11 @@
   font-weight: bold;
   transition: ease-in-out all .2s;
   display: block;
-  padding: 5px;
+  padding: 5px 10px;
   font-size: 14px;
 
   &:hover {
-    background: #2389cd;
+    background: #2389cd !important;
   }
 
 }
@@ -245,11 +250,11 @@
   font-weight: bold;
   transition: ease-in-out all .2s;
   display: block;
-  padding: 5px;
+  padding: 5px 10px;
   font-size: 14px;
 
   &:hover {
-    background: #55971c;
+    background: #55971c !important;
   }
 
 }

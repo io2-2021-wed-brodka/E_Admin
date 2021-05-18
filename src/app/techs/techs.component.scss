@@ -1,8 +1,13 @@
 .techs-component {
   padding: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
   color: #444;
+
+  button {
+    margin: 0 10px;
+  }
 
   .header {
     font-size: 20px;
@@ -19,7 +24,7 @@
 
   .techs {
     padding: 20px;
-    width: 50%;
+    width: 75%;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -169,3 +174,56 @@
     }
   }
 }
+
+
+.remove-button {
+  border: unset;
+  background: #dc4343;
+  float: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: ease-in-out all .2s;
+  display: block;
+  padding: 5px 10px;
+  font-size: 14px;
+
+  &:hover {
+    background: #b11c23 !important;
+  }
+
+}
+
+.unlock-button {
+  border: unset;
+  background: #3ea0dc;
+  float: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: ease-in-out all .2s;
+  display: block;
+  padding: 5px 10px;
+  font-size: 14px;
+
+  &:hover {
+    background: #2389cd !important;
+  }
+
+}
+
+.add-button {
+  border: unset;
+  background: #7bd055;
+  float: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: ease-in-out all .2s;
+  display: block;
+  padding: 5px 10px;
+  font-size: 14px;
+
+  &:hover {
+    background: #55971c !important;
+  }
+
+}
+
