@@ -25,6 +25,7 @@ export class StationsComponent implements OnInit {
     allStations: BikeStationDTO[];
     displayedStations: BikeStationDTO[];
     stationDTO: BikeStationDTO;
+    stationNumberOfBikes: number;
 
     createStationRequestDTO: CreateStationRequestDTO;
     addBikeRequestDTO: AddBikeRequestDTO;
@@ -163,9 +164,10 @@ export class StationsComponent implements OnInit {
         return true;
     }
 
-    displayNumberOfBikes(s: BikeStationDTO) {
+    selectStationAndLoadDetails(s: BikeStationDTO) {
+        this.stationDTO = s;
         this.bikeStationService.getBikesInStation(s.id).subscribe(bikeList => {
-            alert(`${s.name} contains ${bikeList.bikes.length} bikes: (${bikeList.bikes.map(b => b.id).join(', ')})`);
+            this.stationNumberOfBikes = bikeList.bikes.length;
         });
     }
 
