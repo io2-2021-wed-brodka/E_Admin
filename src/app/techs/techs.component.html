@@ -1,0 +1,78 @@
+<div class="techs-component">
+
+  <div class="techs">
+
+    <div class="techs-container">
+      <div class="labels">
+        <div>Id</div>
+        <div class="name">Name</div>
+        <div class="actions">Actions</div>
+      </div>
+      <div class="tech" *ngFor="let s of displayedTechs">
+        <div class="id">{{s.id}}</div>
+        <div class="name">{{s.name}}</div>
+        <div class="actions">
+          <button (click)="onTechChangeStateClick(s)">{{isTechBlocked(s) ? "Unblock" : "Block"}}</button>
+          <button (click)="onDeleteTechClick(s)">Delete tech</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button (click)="onAddTechClick()">Add new tech</button>
+    </div>
+
+  </div>
+
+  <div class="add-tech-modal-bg" *ngIf="showAddTechConfirmDialog">
+    <div class="add-tech-modal">
+
+      <div class="description">
+        New tech
+      </div>
+
+      <div class="form">
+        <table>
+          <tr>
+            <td>Name/login</td>
+            <td><input id="name" type="text" #name placeholder="Tech name/login" (input)="createTechRequestDTO.name=name.value" /></td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td><input id="password" type="password" #password placeholder="****" (input)="createTechRequestDTO.password=password.value" /></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="actions">
+        <button class="no" (click)="onAddTechCancel()">Cancel</button>
+        <button class="yes" (click)="onAddTechConfirm()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="change-tech-state-modal-bg" *ngIf="showTechStateChangeConfirmationDialog">
+    <div class="change-tech-state-modal">
+      <div class="description">
+        Are you sure you want to {{isTechBlocked(tech) ? "unblock" : "block"}} station <span>{{tech.name}}</span>?
+      </div>
+      <div class="actions">
+        <button class="no" (click)="onTechChangeStateCancel()">No</button>
+        <button class="yes" (click)="onTechChangeStateConfirm()">Yes</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="delete-tech-modal-bg" *ngIf="showDeleteTechConfirmDialog">
+    <div class="delete-tech-modal">
+      <div class="description">
+        Are you sure you want to delete tech <span>{{tech.name}}</span>?
+      </div>
+      <div class="actions">
+        <button class="no" (click)="onDeleteTechCancel()">No</button>
+        <button class="yes" (click)="onDeleteTechConfirm()">Yes</button>
+      </div>
+    </div>
+  </div>
+
+</div>
