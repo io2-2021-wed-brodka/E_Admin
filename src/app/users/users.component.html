@@ -1,0 +1,35 @@
+<div class="users-component">
+
+  <div class="users">
+
+    <div class="users-container">
+      <div class="labels">
+        <div>Id</div>
+        <div class="name">Name</div>
+        <div class="actions">Actions</div>
+      </div>
+      <div class="user" *ngFor="let s of displayedUsers">
+        <div class="id">{{s.id}}</div>
+        <div class="name">{{s.name}}</div>
+        <div class="actions">
+          <button  class="ui-button unlock-button" (click)="onUserChangeStateClick(s)">{{isUserBlocked(s) ? "Unblock" : "Block"}}</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="add-user-modal-bg" *ngIf="showUserStateChangeConfirmationDialog">
+    <div class="add-user-modal">
+      <div class="description">
+        Are you sure you want to {{isUserBlocked(user) ? "unblock" : "block"}} station <span>{{user.name}}</span>?
+      </div>
+
+      <div class="actions">
+        <button class="ui-button remove-button" (click)="onUserChangeStateCancel()">No</button>
+        <button class="ui-button add-button" (click)="onUserChangeStateConfirm()">Yes</button>
+      </div>
+    </div>
+  </div>
+
+</div>
