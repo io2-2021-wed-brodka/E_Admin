@@ -4,7 +4,7 @@ import {SecurityService} from '../common/service/security.service';
 import {AppService} from '../app.service';
 import {MsgService} from '../common/service/msg.service';
 import {BikeService} from '../common/service/bike.service';
-import {AddBikeRequestDTO, BikeStationDTO, BikeStationState, CreateStationRequestDTO} from '../generated/dto';
+import {AddBikeRequestDTO, BikeStationDTO, StationState, CreateStationRequestDTO} from '../generated/dto';
 import {BikeStationService} from '../common/service/bike-station.service';
 
 @Component({
@@ -172,6 +172,6 @@ export class StationsComponent implements OnInit {
     }
 
     isStationBlocked(s: BikeStationDTO) {
-        return s.status === BikeStationState.blocked;
+        return s.status === StationState.blocked;
     }
 }
