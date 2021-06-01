@@ -22,7 +22,7 @@ export class UserService {
         return this.http.post<UserDTO>(`/api/users/blocked`, blockUserRequestDTO);
     }
 
-    unblockUser(userId: number): Observable<UserDTO> {
+    unblockUser(userId: string): Observable<UserDTO> {
         return this.http.delete<UserDTO>(`/api/users/blocked/${userId}`);
     }
 

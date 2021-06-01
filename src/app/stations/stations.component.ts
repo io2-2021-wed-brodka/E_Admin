@@ -158,7 +158,7 @@ export class StationsComponent implements OnInit {
         if (addBikeRequest == null) {
             return false;
         }
-        if (addBikeRequest.stationId == null || addBikeRequest.stationId <= 0) {
+        if (addBikeRequest.stationId == null) {
             return false;
         }
         return true;

@@ -19,7 +19,7 @@ export class TechService {
     }
 
 
-    deleteTech(techId: number): Observable<UserDTO> {
+    deleteTech(techId: string): Observable<UserDTO> {
         return this.http.delete<UserDTO>(`/api/techs/${techId}`);
     }
 

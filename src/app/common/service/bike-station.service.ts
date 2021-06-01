@@ -13,7 +13,7 @@ export class BikeStationService {
         return this.http.get<BikeStationListDTO>("/api/stations");
     }
 
-    getBikesInStation(stationId: number): Observable<BikeListDTO> {
+    getBikesInStation(stationId: string): Observable<BikeListDTO> {
         return this.http.get<BikeListDTO>(`/api/stations/${stationId}/bikes`);
     }
 
@@ -21,15 +21,15 @@ export class BikeStationService {
         return this.http.post("/api/stations", createStationRequestDTO);
     }
 
-    blockStation(stationId: number): Observable<BikeStationDTO> {
+    blockStation(stationId: string): Observable<BikeStationDTO> {
         return this.http.post<BikeStationDTO>(`/api/stations/blocked`, stationId);
     }
 
-    unblockStation(stationId: number): Observable<MessageResponseDTO> {
+    unblockStation(stationId: string): Observable<MessageResponseDTO> {
         return this.http.delete<MessageResponseDTO>(`/api/stations/blocked/${stationId}`);
     }
 
-    deleteStation(stationId: number): Observable<MessageResponseDTO> {
+    deleteStation(stationId: string): Observable<MessageResponseDTO> {
         return this.http.delete<MessageResponseDTO>(`/api/stations/${stationId}`);
     }
 

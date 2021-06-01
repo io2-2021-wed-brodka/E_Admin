@@ -13,7 +13,7 @@ export class BikeService {
         return this.http.post('/api/bikes', addBikeRequestDTO);
     }
 
-    deleteBike(bikeId: number): Observable<void> {
+    deleteBike(bikeId: string): Observable<void> {
         return this.http.delete<void>(`/api/bikes/${bikeId}`);
     }
 
