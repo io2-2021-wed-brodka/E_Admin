@@ -16,7 +16,7 @@
       <div class="station" *ngFor="let s of displayedStations" (click)="selectStationAndLoadDetails(s)">
         <div class="id">{{s.id}}</div>
         <div class="name">{{s.name}}</div>
-        <div class="name">{{s.maxBikes}}</div>
+        <div class="name">{{s.bikesLimit}}</div>
         <div class="actions">
           <button class="ui-button add-button" (click)="onAddNewBikeClick(s)">Add bike</button>
           <button class="ui-button unlock-button" (click)="onStationChangeStateClick(s)">{{isStationBlocked(s) ? "Unblock" : "Block"}}</button>
@@ -58,7 +58,7 @@
           </tr>
           <tr>
             <td>Capacity</td>
-            <td><input id="capacity" type="number" #capacity placeholder="positive number" (input)="createStationRequestDTO.maxBikes=capacity.valueAsNumber" /></td>
+            <td><input id="capacity" type="number" #capacity placeholder="positive number" (input)="createStationRequestDTO.bikesLimit=capacity.valueAsNumber" /></td>
           </tr>
         </table>
       </div>
@@ -96,7 +96,7 @@
 
   <div class="details" *ngIf="stationDTO != null">
     <div class="header">Station: <span> {{stationDTO.name}}</span></div>
-    <div class="detail">Bikes: {{stationNumberOfBikes}}/{{stationDTO.maxBikes}} </div>
+    <div class="detail">Bikes: {{stationNumberOfBikes}}/{{stationDTO.bikesLimit}} </div>
     <div class="detail">Reservations: 0 </div>
     <div class="detail">Malfunctions: 0 </div>
 

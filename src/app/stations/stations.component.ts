@@ -57,7 +57,7 @@ export class StationsComponent implements OnInit {
     }
 
     onAddStationClick() {
-        this.createStationRequestDTO = {name: '', maxBikes: 1};
+        this.createStationRequestDTO = {name: '', bikesLimit: 1};
         this.showAddStationConfirmDialog = true;
     }
 
@@ -148,7 +148,7 @@ export class StationsComponent implements OnInit {
         if (createStationRequestDTO.name == null || createStationRequestDTO.name.length == 0) {
             return false;
         }
-        if (createStationRequestDTO.maxBikes == null || createStationRequestDTO.maxBikes <= 0) {
+        if (createStationRequestDTO.bikesLimit == null || createStationRequestDTO.bikesLimit <= 0) {
             return false;
         }
         return true;
@@ -172,6 +172,6 @@ export class StationsComponent implements OnInit {
     }
 
     isStationBlocked(s: BikeStationDTO) {
-        return s.status === BikeStationState.Blocked;
+        return s.status === BikeStationState.blocked;
     }
 }
