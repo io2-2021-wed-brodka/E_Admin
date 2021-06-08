@@ -11,7 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../target/classes/static/front-app",
+            "outputPath": "./target/classes/static/front-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
@@ -135,7 +135,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../target/classes/static/front-app-en",
+            "outputPath": "./target/classes/static/front-app-en",
             "index": "src/index_en.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
